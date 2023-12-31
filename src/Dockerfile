@@ -7,8 +7,8 @@ WORKDIR /usr/src/app
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DATA_ROOT /usr/src/app/data
-ENV SERVER_PORT 8000
+
+ENV ACTION_DIRECTORY /action_directory
 
 EXPOSE 8000
 
