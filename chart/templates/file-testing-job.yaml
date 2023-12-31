@@ -1,31 +1,29 @@
 apiVersion: batch/v1
-kind: Deployment
+kind: Job
 metadata:
-  name: storage-tester-job
+  name: gcs-fuse-csi-job-example
+  namespace: NAMESPACE
 spec:
   template:
-    annotations:
-      gke-gcsfuse/volumes: "true"
+    metadata:
+      annotations:
+        gke-gcsfuse/volumes: "true"
     spec:
-      serviceAccountName: {{ include "chart.serviceAccountName" . }}
-      volumes:
-        - name: gcs-fuse-csi-ephemeral
-          csi:
-            driver: gcsfuse.csi.storage.gke.io
-            readOnly: false
-            volumeAttributes:
-              bucketName: {{ .Values.job.bucketName }}
-              mountOptions: "implicit-dirs"
+      serviceAccountName: KSA_NAME
       containers:
       - name: storage-tester
-        image: {{ .Values.job.image.repository }}:{{ .Values.job.image.tag }}
-        imagePullPolicy: {{ .Values.job.image.pullPolicy }}
+        image: gat786/gcs-fuse-test:latest
         env:
-          - name: ACTION_DIRECTORY
-            value: {{ .Values.job.actionDirectory }}
+        - name: ACTION_DIRECTORY
+          value: /data
         volumeMounts:
-          - name: gcs-fuse-csi-ephemeral
-            mountPath: {{ .Values.job.actionDirectory }}
-            readOnly: false
+        - name: gcs-fuse-csi-ephemeral
+          mountPath: /data
+      volumes:
+      - name: gcs-fuse-csi-ephemeral
+        csi:
+          driver: gcsfuse.csi.storage.gke.io
+          volumeAttributes:
+            bucketName: test-storage-mounting
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 1
