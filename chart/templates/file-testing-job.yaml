@@ -9,7 +9,7 @@ spec:
       volumes:
         - name: gcs-fuse-csi-ephemeral
           csi:
-            driver: gcs-fuse.csi.storage.gke.io
+            driver: gcsfuse.csi.storage.gke.io
             volumeAttributes:
               bucketName: {{ .Values.job.bucketName }}
       containers:
