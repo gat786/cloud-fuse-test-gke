@@ -9,7 +9,7 @@ spec:
       annotations:
         gke-gcsfuse/volumes: "true"
     spec:
-      serviceAccountName: KSA_NAME
+      serviceAccountName: test-storage-chart
       containers:
       - name: storage-tester
         image: gat786/gcs-fuse-test:latest
