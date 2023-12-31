@@ -1,3 +1,5 @@
+gcloud storage buckets create gs://test-storage-mounting
+
 gcloud iam service-accounts create gcs-test-fuse \
   --project=bhdigital-data-dev
 
