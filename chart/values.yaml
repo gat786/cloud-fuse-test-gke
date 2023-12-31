@@ -103,3 +103,6 @@ job:
     repository: gat786/gcs-fuse-test
     tag: latest
     pullPolicy: IfNotPresent
+
+  actionDirectory: /action
+  bucketName: test-storage-mounting
