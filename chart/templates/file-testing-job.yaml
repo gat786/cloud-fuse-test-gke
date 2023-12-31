@@ -5,13 +5,17 @@ metadata:
 spec:
   template:
     spec:
+      annotations:
+        gke-gcsfuse/volumes: "true"
       serviceAccountName: {{ include "chart.serviceAccountName" . }}
       volumes:
         - name: gcs-fuse-csi-ephemeral
           csi:
             driver: gcsfuse.csi.storage.gke.io
+            readOnly: false
             volumeAttributes:
               bucketName: {{ .Values.job.bucketName }}
+              mountOptions: "implicit-dirs"
       containers:
       - name: storage-tester
         image: {{ .Values.job.image.repository }}:{{ .Values.job.image.tag }}
