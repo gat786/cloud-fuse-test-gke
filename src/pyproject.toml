@@ -9,6 +9,8 @@ packages = [{include = "gcs_test"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+ruff = "^0.1.9"
+python-dotenv = "^1.0.0"
 
 
 [build-system]
