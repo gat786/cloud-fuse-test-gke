@@ -12,7 +12,7 @@ spec:
       serviceAccountName: test-storage-chart
       containers:
       - name: storage-tester
-        image: gat786/gcs-fuse-test:latest
+        image: gat786/gcs_fuse_test:latest
         env:
         - name: ACTION_DIRECTORY
           value: /data
