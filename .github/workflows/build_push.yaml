@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        context: gcs_fuse_test
+        context: src
         tags: gat786/gcs_fuse_test, gat786/gcs_fuse_test:${{ github.sha }}
         platforms: linux/arm64, linux/amd64
     
