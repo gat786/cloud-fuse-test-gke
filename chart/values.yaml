@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: gat786/gcs_fuse_test
+  repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
