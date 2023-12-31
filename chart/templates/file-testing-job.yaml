@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: storage-tester-job
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      volumes:
+        - name: gcs-fuse-csi-ephemeral
+          csi:
+            driver: gcs-fuse.csi.storage.gke.io
+            volumeAttributes:
+              bucketName: {{ .Values.job.bucketName }}
+      containers:
+      - name: storage-tester
+        image: {{ .Values.job.image.repository }}:{{ .Values.job.image.tag }}
+        imagePullPolicy: {{ .Values.job.image.pullPolicy }}
+        env:
+          - name: ACTION_DIRECTORY
+            value: {{ .Values.job.actionDirectory }}
+        volumeMounts:
+          - name: gcs-fuse-csi-ephemeral
+            mountPath: {{ .Values.job.actionDirectory }}
+            readOnly: false
+      restartPolicy: Never
+  backoffLimit: 4
