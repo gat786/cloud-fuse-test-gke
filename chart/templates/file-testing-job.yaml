@@ -4,9 +4,9 @@ metadata:
   name: storage-tester-job
 spec:
   template:
+    annotations:
+      gke-gcsfuse/volumes: "true"
     spec:
-      annotations:
-        gke-gcsfuse/volumes: "true"
       serviceAccountName: {{ include "chart.serviceAccountName" . }}
       volumes:
         - name: gcs-fuse-csi-ephemeral
